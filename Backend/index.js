@@ -27,20 +27,20 @@ app.post("/convertFile", upload.single("file"), (req, res, next) => {
                 message: "No file  uploaded",
             });
         }
-        // Defining output file path
-        let outputPath = path.join(
+        // Defining outout file path
+        let outoutPath = path.join(
             __dirname,
             "files",
             `${req.file.originalname}.pdf`
         );
-        docxToPDF(req.file.path, outputPath, (err, result) => {
+        docxToPDF(req.file.path, outoutPath, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
                     message: "Error converting docx to pdf",
                 });
             }
-            res.download(outputPath, () => {
+            res.download(outoutPath, () => {
                 console.log("file downloaded");
             });
         });
